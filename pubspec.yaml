@@ -41,6 +41,8 @@ dependencies:
   google_fonts: any
   get: any
   image_picker: any
+  video_player: any
+  video_compress: any
 
 dev_dependencies:
   flutter_test:

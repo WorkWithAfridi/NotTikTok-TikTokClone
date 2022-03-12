@@ -30,4 +30,4 @@ class NotTikTokApp extends StatelessWidget {
   }
 }
 
-//done till 1:17
+//done till 1:53:08

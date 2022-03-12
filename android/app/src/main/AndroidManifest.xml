@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.workwithafridi.not_tiktok">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="not_tiktok"
         android:name="${applicationName}"
