@@ -24,6 +24,8 @@ class AuthController extends GetxController {
     ever(_user, _setInitialScreen);
   }
 
+  User get user=>_user.value!;
+
   _setInitialScreen(User? user) {
     if (user == null) {
       Get.offAll(() => LoginScreen());

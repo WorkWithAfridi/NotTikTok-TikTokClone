@@ -39,6 +39,13 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
