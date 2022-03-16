@@ -43,6 +43,7 @@ dependencies:
   image_picker: any
   video_player: any
   video_compress: any
+  timeago: any
 
 dev_dependencies:
   flutter_test:

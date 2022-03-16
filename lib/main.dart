@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_tiktok/constants/customColors.dart';
+import 'package:not_tiktok/views/auth/SignupScreen.dart';
+import 'package:not_tiktok/views/homeScreen.dart';
 import 'package:not_tiktok/views/splashScreen.dart';
 
 import 'controller/auth_controller.dart';
@@ -23,9 +25,9 @@ class NotTikTokApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark()
           .copyWith(primaryColor: primary, scaffoldBackgroundColor: background),
-      home: SplashScreen(),
+      home:SplashScreen(),
     );
   }
 }
 
-//done till 1:53:08
+//done till 2:46:17

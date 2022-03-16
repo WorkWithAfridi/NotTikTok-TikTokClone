@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/controller/videoController.dart';
+import 'package:not_tiktok/views/commentScreen.dart';
 import 'package:not_tiktok/widgets/videoPlayerItem.dart';
 
 import '../widgets/circleAnimation.dart';
@@ -146,23 +147,33 @@ class VideoScreen extends StatelessWidget {
                                     Column(
                                       children: [
                                         InkWell(
-                                          onTap: () =>videoController.likeVideo(data.vid),
+                                          onTap: () => videoController
+                                              .likeVideo(data.vid),
                                           child: Icon(
                                             Icons.favorite,
-                                            color: data.likes.contains(authController.user.uid) ? Colors.red : Colors.white,
+                                            color: data.likes.contains(
+                                                    authController.user.uid)
+                                                ? Colors.red
+                                                : Colors.white,
                                           ),
                                         ),
                                         SizedBox(
                                           height: 7,
                                         ),
-                                        Text(
-                                            '${data.likes.length.toString()}'),
+                                        Text('${data.likes.length.toString()}'),
                                       ],
                                     ),
                                     Column(
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CommentScreen( id: data.vid,),
+                                              ),
+                                            );
+                                          },
                                           child: Icon(
                                             Icons.comment,
                                             color: Colors.white,
