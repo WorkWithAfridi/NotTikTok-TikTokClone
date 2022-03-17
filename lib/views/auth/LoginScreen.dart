@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/constants/customTextStyles.dart';
+import 'package:not_tiktok/views/auth/SignupScreen.dart';
 import 'package:not_tiktok/widgets/customTextField.dart';
 
 import '../../constants/customColors.dart';
@@ -72,7 +73,9 @@ class LoginScreen extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(SignupScreen());
+              },
               child: Container(
                 color: primary,
                 height: 50,

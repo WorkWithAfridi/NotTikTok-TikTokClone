@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/views/addVideoScreen.dart';
+import 'package:not_tiktok/views/profileScreen.dart';
+import 'package:not_tiktok/views/searchScreen.dart';
 import 'package:not_tiktok/views/videoScreen.dart';
 
 List homeScreenPages = [
   VideoScreen(),
-  Container(
-    alignment: Alignment.center,
-    child: Text('Search'),
-  ),
+  SearchScreen(),
   AddVideoScreen(),
   Container(
     alignment: Alignment.center,
     child: Text('Messages'),
   ),
-  Container(
-    alignment: Alignment.center,
-    child: Text('Profile'),
-  ),
+  ProfileScreen(uid: authController.user.uid)
 ];

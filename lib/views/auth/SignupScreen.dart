@@ -111,7 +111,9 @@ class SignupScreen extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+              },
               child: Container(
                 color: primary,
                 height: 50,

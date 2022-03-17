@@ -24,7 +24,7 @@ class AuthController extends GetxController {
     ever(_user, _setInitialScreen);
   }
 
-  User get user=>_user.value!;
+  User get user => _user.value!;
 
   _setInitialScreen(User? user) {
     if (user == null) {
@@ -107,5 +107,9 @@ class AuthController extends GetxController {
       print(e.toString());
       Get.snackbar('Error', 'An error occurred, please try again.');
     }
+  }
+
+  void signOut() async {
+    await firebaseAuth.signOut();
   }
 }

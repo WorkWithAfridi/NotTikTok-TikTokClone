@@ -44,6 +44,7 @@ dependencies:
   video_player: any
   video_compress: any
   timeago: any
+  cached_network_image: any
 
 dev_dependencies:
   flutter_test:

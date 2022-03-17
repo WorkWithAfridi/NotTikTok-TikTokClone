@@ -31,7 +31,6 @@ class AddVideoScreen extends StatelessWidget {
           SimpleDialogOption(
             onPressed: () {
               pickVideo(ImageSource.camera, context);
-              Get.back();
             },
             child: Row(
               children: const [

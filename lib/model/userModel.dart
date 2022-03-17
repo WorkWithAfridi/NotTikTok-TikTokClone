@@ -24,7 +24,7 @@ class UserModel {
     var snapshot = snap.data() as Map<String, dynamic>;
     return UserModel(
       username: snapshot['username'],
-      profilePictureUrl: snapshot['profilePictureUrl'],
+      profilePictureUrl: snapshot['profilePhotoUrl'],
       email: snapshot['email'],
       uid: snapshot['uid'],
     );
