@@ -23,11 +23,9 @@ class _SearchScreenState extends State<SearchScreen> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           title: getCustomTextField(
-            textEditingController: searchTEC,
-            textInputType: TextInputType.text,
-            maxLines: 1,
-            hintText: 'Search',
-          ),
+              textEditingController: searchTEC,
+              labelText: 'Enter email',
+              icon: Icons.mail),
           actions: [
             IconButton(
               onPressed: () {
@@ -52,7 +50,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     UserModel user = searchController.getSearchedUsers[index];
                     return InkWell(
                       onTap: () {
-                        Get.to(ProfileScreen(uid: user.uid),);
+                        Get.to(
+                          ProfileScreen(uid: user.uid),
+                        );
                       },
                       child: ListTile(
                         leading: CircleAvatar(

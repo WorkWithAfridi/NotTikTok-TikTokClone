@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
-import 'package:not_tiktok/constants/customTextStyles.dart';
+import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/views/auth/SignupScreen.dart';
 import 'package:not_tiktok/widgets/customTextField.dart';
 
@@ -17,78 +17,131 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: getHeight(context),
-        width: getWidth(context),
-        padding: EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'NotTikTok',
-              style: appNameTextStyle,
+      body: Stack(
+        children: [
+          SizedBox(
+            height: getHeight(context),
+            width: getWidth(context),
+            child: Image.asset(
+              'assets/backdropTwo.png',
+              fit: BoxFit.cover,
             ),
-            Text(
-              'Login',
-              style: defaultTextStyle,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            getCustomTextField(
-                textEditingController: emailTEC,
-                hintText: 'Enter email',
-                textInputType: TextInputType.emailAddress,
-                maxLines: 1),
-            SizedBox(
-              height: 10,
-            ),
-            getCustomTextField(
-              textEditingController: passwordTEC,
-              hintText: 'Enter ppassword',
-              textInputType: TextInputType.text,
-              maxLines: 1,
-              isPass: true,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                authController.loginUser(emailTEC.text, passwordTEC.text);
-              },
-              child: Container(
-                color: primary,
-                height: 50,
-                width: getWidth(context),
-                alignment: Alignment.center,
-                child: Text(
-                  'Login',
-                  style: defaultTextStyle,
+          ),
+          Container(
+            height: getHeight(context),
+            width: getWidth(context),
+            color: Colors.black.withOpacity(.75),
+          ),
+          Container(
+            height: getHeight(context),
+            width: getWidth(context),
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'NotTikTok',
+                          style: AppTitleTextStyle.copyWith(fontSize: 30),
+                        ),
+                        Text(
+                          'Its !TikTok and thats enough!',
+                          style: subHeaderNotHighlightedTextStyle.copyWith(
+                              height: .8, fontSize: 13),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        getCustomTextField(
+                            textEditingController: emailTEC,
+                            labelText: 'Enter email',
+                            icon: Icons.mail),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        getCustomTextField(
+                          textEditingController: passwordTEC,
+                          labelText: 'Enter password',
+                          icon: Icons.password,
+                          isObscure: true,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            authController.loginUser(
+                                emailTEC.text, passwordTEC.text);
+                          },
+                          child: Container(
+                            height: 40,
+                            width: getWidth(context),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: primary,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Text(
+                              'Login',
+                              style: subHeaderTextStyle,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Get.to(SignupScreen());
+                        //   },
+                        //   child: Container(
+                        //     color: primary,
+                        //     height: 50,
+                        //     width: getWidth(context),
+                        //     alignment: Alignment.center,
+                        //     child: Text(
+                        //       'Signup',
+                        //       style: subHeaderTextStyle,
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                Get.to(SignupScreen());
-              },
-              child: Container(
-                color: primary,
-                height: 50,
-                width: getWidth(context),
-                alignment: Alignment.center,
-                child: Text(
-                  'Signup',
-                  style: defaultTextStyle,
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account? ",
+                      style: subHeaderNotHighlightedTextStyle,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => SignupScreen());
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: subHeaderTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

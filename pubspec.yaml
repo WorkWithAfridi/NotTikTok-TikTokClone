@@ -39,12 +39,15 @@ dependencies:
   cloud_firestore: any
   firebase_storage: any
   google_fonts: any
+  lottie: any
   get: any
   image_picker: any
   video_player: any
   video_compress: any
   timeago: any
   cached_network_image: any
+  image_cropper: any
+  flutter_image_compress: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,8 +72,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/
+     - assets/lottieAnimations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

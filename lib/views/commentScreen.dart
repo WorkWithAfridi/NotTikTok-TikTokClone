@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/constants/customColors.dart';
+import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/controller/commentController.dart';
 import 'package:not_tiktok/widgets/customTextField.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -50,21 +51,34 @@ class CommentScreen extends StatelessWidget {
                               ),
                               title: Row(
                                 children: [
-                                  Text(comment.username),
+                                  Text(
+                                    comment.username,
+                                    style: userNameTextStyle,
+                                  ),
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  Text(comment.comment),
+                                  Text(
+                                    comment.comment,
+                                    style: subHeaderNotHighlightedTextStyle
+                                        .copyWith(color: Colors.white),
+                                  ),
                                 ],
                               ),
                               subtitle: Row(
                                 children: [
-                                  Text(timeago
-                                      .format(comment.datePublished.toDate())),
+                                  Text(
+                                    timeago
+                                        .format(comment.datePublished.toDate()),
+                                    style: subHeaderNotHighlightedTextStyle,
+                                  ),
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  Text('${comment.likes.length} likes'),
+                                  Text('- ',
+                                      style: subHeaderNotHighlightedTextStyle),
+                                  Text('${comment.likes.length} likes',
+                                      style: subHeaderNotHighlightedTextStyle),
                                 ],
                               ),
                               trailing: IconButton(
@@ -84,36 +98,39 @@ class CommentScreen extends StatelessWidget {
                           itemCount: commentController.listOfComments.length,
                         );
                       }),
-                      Divider()
                     ],
                   ),
                 ),
               ),
             ),
             Container(
-              height: 65,
+              height: 70,
               width: getWidth(context),
               padding: EdgeInsets.symmetric(horizontal: 15),
               // color: Colors.blue,
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: getCustomTextField(
-                      textEditingController: commentTECController,
-                      hintText: 'Comment',
-                      maxLines: 1,
-                      textInputType: TextInputType.text,
-                    ),
+                  Divider(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: getCustomTextField(
+                            textEditingController: commentTECController,
+                            labelText: 'Enter email',
+                            icon: Icons.mail),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          commentController
+                              .postComment(commentTECController.text);
+                        },
+                        child: Text(
+                          "SEND",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
+                    ],
                   ),
-                  TextButton(
-                    onPressed: () {
-                      commentController.postComment(commentTECController.text);
-                    },
-                    child: Text(
-                      "SEND",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  )
                 ],
               ),
             )
