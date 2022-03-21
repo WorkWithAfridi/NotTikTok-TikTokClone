@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/constants/textStyles.dart';
-import 'package:not_tiktok/views/confirm_screen.dart';
+import 'package:not_tiktok/views/confirmVideoDetailsForUploadScreeen.dart';
 
 class AddVideoScreen extends StatelessWidget {
   const AddVideoScreen({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class AddVideoScreen extends StatelessWidget {
     if (video != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ConfirmScreen(
+          builder: (context) => ConfirmVideoDetailsForUploadScreen(
             videoPath: video.path,
             video: File(video.path),
           ),

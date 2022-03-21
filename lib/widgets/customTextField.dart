@@ -92,7 +92,8 @@ class getCustomTextFieldWithoutIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
-      borderSide: Divider.createBorderSide(context),
+      borderSide: Divider.createBorderSide(context, color: Colors.white, width: 1),
+
     );
     return TextField(
       style: subHeaderTextStyle.copyWith(fontSize: 16),
