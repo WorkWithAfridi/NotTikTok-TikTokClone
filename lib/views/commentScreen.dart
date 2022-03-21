@@ -104,7 +104,7 @@ class CommentScreen extends StatelessWidget {
               ),
             ),
             Container(
-              height: 70,
+              height: 80,
               width: getWidth(context),
               padding: EdgeInsets.symmetric(horizontal: 15),
               // color: Colors.blue,
@@ -114,15 +114,17 @@ class CommentScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: getCustomTextField(
+                        child: getCustomTextFieldWithoutIcon(
                             textEditingController: commentTECController,
-                            labelText: 'Enter email',
-                            icon: Icons.mail),
+                            hintText: 'Enter comment',
+                            textInputType: TextInputType.text,
+                            maxLines: 1),
                       ),
                       TextButton(
                         onPressed: () {
                           commentController
                               .postComment(commentTECController.text);
+                          commentTECController.text = '';
                         },
                         child: Text(
                           "SEND",

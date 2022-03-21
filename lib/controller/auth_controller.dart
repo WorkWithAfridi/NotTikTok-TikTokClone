@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:not_tiktok/constants/firebase.dart';
 import 'package:not_tiktok/model/userModel.dart';
 import 'package:not_tiktok/views/auth/LoginScreen.dart';
-import 'package:not_tiktok/views/homeScreen.dart';
+import 'package:not_tiktok/views/mainframe.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -33,7 +33,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => LoginScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => Mainframe());
     }
   }
 
@@ -105,7 +105,7 @@ class AuthController extends GetxController {
         firestore.collection('users').doc(userCredential.user!.uid).set(
               userModel.toJson(),
             );
-        Get.offAll(() => HomeScreen());
+        Get.offAll(() => Mainframe());
         Get.snackbar('Hi, $username', 'Welcome to !TikTok! :)');
       } else {
         Get.snackbar('Error', 'Fields cannot be empty');

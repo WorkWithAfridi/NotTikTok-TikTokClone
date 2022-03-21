@@ -73,7 +73,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
                       width: getWidth(context) - 20,
-                      child: getCustomTextField(
+                      child: getCustomTextFieldWithIcon(
                           textEditingController: songController,
                           labelText: 'Enter email',
                           icon: Icons.mail),
@@ -85,7 +85,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       margin: EdgeInsets.only(left: 10, right: 10),
                       width: getWidth(context) - 20,
                       child:
-                      getCustomTextField(textEditingController: captionController, labelText: 'Enter email', icon: Icons.mail),
+                      getCustomTextFieldWithIcon(textEditingController: captionController, labelText: 'Enter email', icon: Icons.mail),
                     ),
                     SizedBox(
                       height: 10,

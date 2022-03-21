@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/constants/textStyles.dart';
 
-class getCustomTextField extends StatelessWidget {
+class getCustomTextFieldWithIcon extends StatelessWidget {
   final TextEditingController textEditingController;
   final String labelText;
   final IconData icon;
   final bool isObscure;
 
-  const getCustomTextField(
+  const getCustomTextFieldWithIcon(
       {Key? key,
       required this.textEditingController,
       required this.labelText,
@@ -22,7 +22,6 @@ class getCustomTextField extends StatelessWidget {
       height: 50,
       child: TextField(
         cursorColor: primary,
-
         controller: textEditingController,
         decoration: InputDecoration(
           labelText: labelText,
@@ -35,7 +34,6 @@ class getCustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(color: Colors.white),
           ),
-
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
@@ -73,5 +71,46 @@ class getCustomTextField extends StatelessWidget {
     //     obscureText: isObscure,
     //   ),
     // );
+  }
+}
+
+class getCustomTextFieldWithoutIcon extends StatelessWidget {
+  final TextEditingController textEditingController;
+  final bool isPassword;
+  final String hintText;
+  final TextInputType textInputType;
+  final int maxLines;
+  const getCustomTextFieldWithoutIcon({
+    Key? key,
+    required this.textEditingController,
+    required this.hintText,
+    required this.textInputType,
+    required this.maxLines,
+    this.isPassword = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final inputBorder = OutlineInputBorder(
+      borderSide: Divider.createBorderSide(context),
+    );
+    return TextField(
+      style: subHeaderTextStyle.copyWith(fontSize: 16),
+      cursorColor: Colors.white,
+      controller: textEditingController,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: subHeaderNotHighlightedTextStyle.copyWith(fontSize: 15),
+        border: inputBorder,
+        focusedBorder: inputBorder,
+        enabledBorder: inputBorder,
+        fillColor: Colors.transparent,
+        filled: true,
+        contentPadding: EdgeInsets.all(8),
+      ),
+      keyboardType: textInputType,
+      obscureText: isPassword,
+    );
   }
 }

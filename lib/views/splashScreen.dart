@@ -6,7 +6,7 @@ import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/views/auth/LoginScreen.dart';
-import 'package:not_tiktok/views/homeScreen.dart';
+import 'package:not_tiktok/views/mainframe.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void triggerSplashScreen(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 3300));
-    Get.to(()=> SplashScreenPush());
+    Get.off(()=> SplashScreenPush());
   }
 
   @override
@@ -120,7 +120,7 @@ class SplashScreenPush extends StatelessWidget {
       builder: (context, snapsnot) {
         if (snapsnot.connectionState == ConnectionState.active) {
           if (snapsnot.hasData) {
-            return HomeScreen();
+            return Mainframe();
           } else if (snapsnot.hasError) {
             return Center(
               child: Text('${snapsnot.error}'),

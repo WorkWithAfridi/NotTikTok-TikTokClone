@@ -8,7 +8,7 @@ import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/controller/auth_controller.dart';
-import 'package:not_tiktok/views/homeScreen.dart';
+import 'package:not_tiktok/views/mainframe.dart';
 import 'package:not_tiktok/widgets/customTextField.dart';
 
 import '../../constants/customColors.dart';
@@ -124,21 +124,21 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(
                       height: 30,
                     ),
-                    getCustomTextField(
+                    getCustomTextFieldWithIcon(
                         textEditingController: usernameTEC,
                         labelText: 'Enter username',
                         icon: Icons.person),
                     SizedBox(
                       height: 15,
                     ),
-                    getCustomTextField(
+                    getCustomTextFieldWithIcon(
                         textEditingController: emailTEC,
                         labelText: 'Enter email',
                         icon: Icons.mail),
                     SizedBox(
                       height: 15,
                     ),
-                    getCustomTextField(
+                    getCustomTextFieldWithIcon(
                       textEditingController: passwordTEC,
                       labelText: 'Enter password',
                       icon: Icons.password,

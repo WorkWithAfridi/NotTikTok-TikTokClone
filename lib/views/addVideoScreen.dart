@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/customColors.dart';
+import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/views/confirm_screen.dart';
 
 class AddVideoScreen extends StatelessWidget {
@@ -27,6 +29,8 @@ class AddVideoScreen extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
+        backgroundColor: Colors.black,
+        alignment: Alignment.center,
         children: [
           SimpleDialogOption(
             onPressed: () {
@@ -91,20 +95,19 @@ class AddVideoScreen extends StatelessWidget {
             showOptionsDialog(context);
           },
           child: Container(
-            height: 50,
+            padding: EdgeInsets.only(top: 60),
+            height: getHeight(context),
             width: 190,
-            decoration: BoxDecoration(color: primary),
+            decoration: BoxDecoration(color: background),
             alignment: Alignment.center,
             child: InkWell(
               onTap: () => showOptionsDialog(context),
-              child: Text(
-                'Add Video',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Container(
+                height: 50,
+                width: getWidth(context)*.6,
+                color: background,
+                child: Image.asset('assets/addVideo.png'),
+              )
             ),
           ),
         ),

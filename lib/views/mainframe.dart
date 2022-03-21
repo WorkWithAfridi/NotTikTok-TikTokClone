@@ -3,14 +3,14 @@ import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/constants/pages.dart';
 import 'package:not_tiktok/widgets/customIcons.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class Mainframe extends StatefulWidget {
+  const Mainframe({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Mainframe> createState() => _MainframeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainframeState extends State<Mainframe> {
   int pageIndex = 0;
 
   @override
@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: homeScreenPages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        // showSelectedLabels: false,
-        // showUnselectedLabels: false,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         selectedItemColor: primary,
         unselectedItemColor: Colors.white,
         backgroundColor: Colors.black,

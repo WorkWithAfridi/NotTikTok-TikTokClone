@@ -57,14 +57,14 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 25,
                         ),
-                        getCustomTextField(
+                        getCustomTextFieldWithIcon(
                             textEditingController: emailTEC,
                             labelText: 'Enter email',
                             icon: Icons.mail),
                         SizedBox(
                           height: 15,
                         ),
-                        getCustomTextField(
+                        getCustomTextFieldWithIcon(
                           textEditingController: passwordTEC,
                           labelText: 'Enter password',
                           icon: Icons.password,
