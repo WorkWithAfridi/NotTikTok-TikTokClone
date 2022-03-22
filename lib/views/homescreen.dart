@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
+import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/controller/videoController.dart';
 import 'package:not_tiktok/views/commentScreen.dart';
 import 'package:not_tiktok/widgets/videoPlayerItem.dart';
@@ -16,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   buildProfile(String profilePhotoUrl) {
     return SizedBox(
       width: 60,
-      height: 60,
+      height: 52,
       child: Stack(
         children: [
           Positioned(
@@ -56,14 +58,14 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.grey,
-                  Colors.white,
+                  primary,
+                  secondary,
                 ],
               ),
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(50),
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(50),
                 child: Image(
                   image: NetworkImage(profilePhoto),
                   fit: BoxFit.cover,
@@ -98,136 +100,140 @@ class HomeScreen extends StatelessWidget {
                   return Stack(
                     children: [
                       VideoPlayerItem(videoUrl: data.videoUrl),
-                      Container(
-                        height: getHeight(context),
-                        width: getWidth(context),
+                      SizedBox(
+                        // color: Colors.red,
+                        height: getHeight(context), width: getWidth(context),
+
                         // color: Colors.blue,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                // color: Colors.yellow,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          // color: Colors.red,
+                          width: getWidth(context),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.only(left: 20),
-                                        child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                data.username,
-                                              ),
-                                              Text(
-                                                data.caption,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.music_note,
-                                                    size: 15,
-                                                    color: Colors.white,
-                                                  ),
-                                                  Text(
-                                                    data.caption,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 35,
-                                              )
-                                            ]),
-                                      ),
+                                    buildProfile(data.profilePhotoUrl),
+                                    SizedBox(
+                                      height: 15,
                                     ),
-                                    Container(
-                                      // height: 800,
-                                      // color: Colors.red,
-                                      margin: EdgeInsets.only(
-                                          top: getHeight(context) / 3),
-                                      padding: EdgeInsets.only(right: 15),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          buildProfile(data.profilePhotoUrl),
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () => videoController
-                                                    .likeVideo(data.vid),
-                                                child: Icon(
-                                                  Icons.favorite,
-                                                  color: data.likes.contains(
-                                                          authController
-                                                              .user.uid)
-                                                      ? Colors.red
-                                                      : Colors.white,
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () => videoController
+                                              .likeVideo(data.vid),
+                                          child: Icon(
+                                            FontAwesomeIcons.solidHeart,
+                                            color: data.likes.contains(
+                                                    authController.user.uid)
+                                                ? Colors.red
+                                                : Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 7,
+                                        ),
+                                        Text('${data.likes.length.toString()}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CommentScreen(
+                                                  id: data.vid,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                  '${data.likes.length.toString()}'),
-                                            ],
+                                            );
+                                          },
+                                          child: Icon(
+                                            FontAwesomeIcons.solidComment,
+                                            color: Colors.white,
                                           ),
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          CommentScreen(
-                                                        id: data.vid,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Icon(
-                                                  Icons.comment,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                  data.commentCount.toString()),
-                                            ],
+                                        ),
+                                        SizedBox(
+                                          height: 7,
+                                        ),
+                                        Text(data.commentCount.toString()),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Icon(
+                                            FontAwesomeIcons.share,
+                                            color: Colors.white,
                                           ),
-                                          Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Icon(
-                                                  Icons.reply,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(data.shareCount.toString()),
-                                            ],
-                                          ),
-                                          CircleAnimation(
-                                            child: buildMusicAlbum(
-                                                data.profilePhotoUrl),
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                                        ),
+                                        SizedBox(
+                                          height: 7,
+                                        ),
+                                        Text(data.shareCount.toString()),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
                                   ],
                                 ),
                               ),
-                            )
-                          ],
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    // color: Colors.red,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          data.username,
+                                        ),
+                                        Text(
+                                          data.caption,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.music_note,
+                                              size: 15,
+                                              color: Colors.white,
+                                            ),
+                                            Text(
+                                              data.caption,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  CircleAnimation(
+                                    child:
+                                        buildMusicAlbum(data.profilePhotoUrl),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],

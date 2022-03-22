@@ -2,7 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
+import 'package:not_tiktok/constants/customColors.dart';
+import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/controller/profileController.dart';
+
+import '../constants/appData.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;
@@ -32,38 +36,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: CircularProgressIndicator(),
             );
           return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.black,
-                leading: Icon(Icons.person_add_alt),
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.more_horiz),
-                  ),
-                ],
-                title: Text(controller.user['username']),
-                centerTitle: true,
-              ),
               body: SafeArea(
-                child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: getHeight(context),
+                  width: getWidth(context),
+                  child: Image.asset(
+                    'assets/backDropFour.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Container(
+                  height: getHeight(context),
+                  width: getWidth(context),
+                  color: Colors.black.withOpacity(.75),
+                ),
+                SingleChildScrollView(
                   child: Column(
                     children: [
+                      AppBar(
+                        backgroundColor: Colors.transparent,
+                        leading: widget.uid == authController.user.uid
+                            ? Container()
+                            : Icon(Icons.person_add_alt),
+                        actions: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.more_horiz),
+                          ),
+                        ],
+                        title: Text(
+                          controller.user['username'],
+                          style: headerTextStyle,
+                        ),
+                        centerTitle: true,
+                      ),
                       Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ClipOval(
-                                child: CachedNetworkImage(
-                                  imageUrl: controller.user['profilePhotoUrl'],
-                                  fit: BoxFit.cover,
-                                  height: 100,
-                                  width: 100,
-                                  placeholder: (context, url) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                ),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    height: 105,
+                                    width: 105,
+                                    decoration: BoxDecoration(
+                                      color: primary,
+                                      borderRadius: BorderRadius.circular(150),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 100,
+                                    width: 100,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            controller.user['profilePhotoUrl'],
+                                        fit: BoxFit.cover,
+                                        height: 100,
+                                        width: 100,
+                                        placeholder: (context, url) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -75,11 +118,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               Column(
                                 children: [
-                                  Text(controller.user['following']),
+                                  Text(
+                                    controller.user['following'],
+                                    style: subHeaderTextStyle,
+                                  ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text('Following'),
+                                  Text(
+                                    'Following',
+                                    style: subHeaderTextStyle,
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -87,11 +136,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Column(
                                 children: [
-                                  Text(controller.user['followers']),
+                                  Text(
+                                    controller.user['followers'],
+                                    style: subHeaderTextStyle,
+                                  ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text('Followers'),
+                                  Text(
+                                    'Followers',
+                                    style: subHeaderTextStyle,
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -99,11 +154,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Column(
                                 children: [
-                                  Text(controller.user['likes']),
+                                  Text(
+                                    controller.user['likes'],
+                                    style: subHeaderTextStyle,
+                                  ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text('Likes'),
+                                  Text(
+                                    'Likes',
+                                    style: subHeaderTextStyle,
+                                  ),
                                 ],
                               ),
                             ],
@@ -111,23 +172,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Container(
-                            width: 140,
-                            height: 47,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black12,
+                          GestureDetector(
+                            onTap: () {
+                              if (widget.uid == authController.user.uid) {
+                                authController.signOut();
+                              } else {
+                                controller.followOrUnfollowUser();
+                              }
+                            },
+                            child: Container(
+                              width: getWidth(context)*.6,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                ),
+                                borderRadius: BorderRadius.circular(5)
+
                               ),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                if (widget.uid == authController.user.uid) {
-                                  authController.signOut();
-                                } else {
-                                  controller.followOrUnfollowUser();
-                                }
-                                print(controller.user['isFollowing']);
-                              },
                               child: Center(
                                 child: Text(
                                   widget.uid == authController.user.uid
@@ -135,15 +197,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       : controller.user['isFollowing']
                                           ? 'Unfollow'
                                           : 'Follow',
+                                  style: subHeaderTextStyle,
                                 ),
                               ),
                             ),
                           ),
-                          //TODO: video list
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: controller.user['thumbnails'].length,
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            // color: Colors.red,
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: controller.user['thumbnails'].length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
@@ -157,13 +224,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   imageUrl: thumbnail,
                                   fit: BoxFit.cover,
                                 );
-                              })
+                              },
+                            ),
+                          )
                         ],
                       )
                     ],
                   ),
                 ),
-              ));
+              ],
+            ),
+          ));
         });
   }
 }

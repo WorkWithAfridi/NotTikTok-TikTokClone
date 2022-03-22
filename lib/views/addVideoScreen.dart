@@ -106,7 +106,7 @@ class AddVideoScreen extends StatelessWidget {
                 height: 50,
                 width: getWidth(context)*.6,
                 color: background,
-                child: Image.asset('assets/addVideo.png'),
+                child: Image.asset('assets/clickToAddAVideo.png'),
               )
             ),
           ),

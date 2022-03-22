@@ -1,7 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:not_tiktok/constants/customColors.dart';
 import 'package:not_tiktok/constants/pages.dart';
+import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/widgets/customIcons.dart';
+
+import 'confirmVideoDetailsForUploadScreeen.dart';
 
 class Mainframe extends StatefulWidget {
   const Mainframe({Key? key}) : super(key: key);
@@ -12,6 +20,123 @@ class Mainframe extends StatefulWidget {
 
 class _MainframeState extends State<Mainframe> {
   int pageIndex = 0;
+  pickVideo(ImageSource src, BuildContext context) async {
+    final video = await ImagePicker().pickVideo(source: src);
+    if (video != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ConfirmVideoDetailsForUploadScreen(
+            videoPath: video.path,
+            video: File(video.path),
+          ),
+        ),
+      );
+    } else{
+      Get.back();
+    }
+  }
+
+  showOptionsDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        backgroundColor: Colors.black,
+        elevation: 6,
+        alignment: Alignment.center,
+        title: GestureDetector(
+          onTap: () {
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => OpenWebView(
+            //         websiteLink:
+            //         'https://sites.google.com/view/workwithafridi'),
+            //   ),
+            // );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '!TikTok',
+                style: headerTextStyle,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'By KYOTO',
+                style: creatorTextStyle,
+              ),
+            ],
+          ),
+        ),
+        children: [
+          SimpleDialogOption(
+            onPressed: () {
+              pickVideo(ImageSource.camera, context);
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.camera,
+                  size: 16,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
+                  child: Text(
+                    'Camera',
+                    style: subHeaderTextStyle,
+                  ),
+                )
+              ],
+            ),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              pickVideo(ImageSource.gallery, context);
+              Get.back();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.image,
+                  size: 16,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
+                  child: Text(
+                    'Gallery',
+                    style: subHeaderTextStyle,
+                  ),
+                )
+              ],
+            ),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.cancel,
+                  size: 16,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
+                  child: Text(
+                    'Cancel',
+                    style: subHeaderTextStyle,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +151,13 @@ class _MainframeState extends State<Mainframe> {
         backgroundColor: Colors.black,
         currentIndex: pageIndex,
         onTap: (index) {
-          setState(() {
-            pageIndex = index;
-          });
+          if (index == 2) {
+            showOptionsDialog(context);
+          } else {
+            setState(() {
+              pageIndex = index;
+            });
+          }
         },
         items: const [
           BottomNavigationBarItem(

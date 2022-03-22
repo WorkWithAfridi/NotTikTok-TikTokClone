@@ -7,8 +7,8 @@ import 'package:not_tiktok/views/searchScreen.dart';
 import 'package:not_tiktok/views/homescreen.dart';
 
 List homeScreenPages = [
-  HomeScreen(),
   SearchScreen(),
+  HomeScreen(),
   AddVideoScreen(),
   Container(
     alignment: Alignment.center,

@@ -27,7 +27,8 @@ class getCustomTextFieldWithIcon extends StatelessWidget {
           labelText: labelText,
           prefixIcon: Icon(
             icon,
-            color: primary,
+            color: Colors.white,
+            size: 16,
           ),
           labelStyle: TextStyle(fontSize: 18, color: Colors.white60),
           enabledBorder: OutlineInputBorder(
