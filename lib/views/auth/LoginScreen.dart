@@ -8,11 +8,19 @@ import 'package:not_tiktok/widgets/customTextField.dart';
 
 import '../../constants/customColors.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailTEC = TextEditingController();
+
   TextEditingController passwordTEC = TextEditingController();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,24 +81,36 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        InkWell(
-                          onTap: () {
-                            authController.loginUser(
-                                emailTEC.text, passwordTEC.text);
-                          },
-                          child: Container(
-                            height: 40,
-                            width: getWidth(context),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: primary,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Text(
-                              'Login',
-                              style: subHeaderTextStyle,
-                            ),
-                          ),
-                        ),
+                        isLoading
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.pink,
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () async {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  await authController.loginUser(
+                                      emailTEC.text, passwordTEC.text);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: getWidth(context),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: primary,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Text(
+                                    'Login',
+                                    style: subHeaderTextStyle,
+                                  ),
+                                ),
+                              ),
                         SizedBox(
                           height: 10,
                         ),

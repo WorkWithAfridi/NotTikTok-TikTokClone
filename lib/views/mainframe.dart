@@ -21,17 +21,18 @@ class Mainframe extends StatefulWidget {
 class _MainframeState extends State<Mainframe> {
   int pageIndex = 0;
   pickVideo(ImageSource src, BuildContext context) async {
-    final video = await ImagePicker().pickVideo(source: src);
+    final video = await ImagePicker().pickVideo(source: src,);
+    print('video chose');
     if (video != null) {
+      print('pushing video');
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ConfirmVideoDetailsForUploadScreen(
-            videoPath: video.path,
-            video: File(video.path),
+          builder: (context) => AddVideoDetailsAndUploadScreen(
+            file: video,
           ),
         ),
       );
-    } else{
+    } else {
       Get.back();
     }
   }

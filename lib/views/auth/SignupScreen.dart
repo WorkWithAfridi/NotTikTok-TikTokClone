@@ -29,6 +29,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Uint8List? _image;
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,33 +149,50 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    InkWell(
-                      onTap: () {
-                        if (usernameTEC.text.isNotEmpty &&
-                            passwordTEC.text.isNotEmpty &&
-                            emailTEC.text.isNotEmpty &&
-                            _image != null) {
-                          authController.registerUser(usernameTEC.text,
-                              emailTEC.text, passwordTEC.text, _image!);
-                        } else {
-                          Get.snackbar('Invalid input',
-                              'User credentials cannot be empty!', margin: EdgeInsets.only(top: 15, left: 5, right: 5 ));
-                        }
-                      },
-                      child: Container(
-                        height: 40,
-                        width: getWidth(context),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: primary,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          'Signup',
-                          style: subHeaderTextStyle,
-                        ),
-                      ),
-                    ),
+                    isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.pink,
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () async {
+                              if (usernameTEC.text.isNotEmpty &&
+                                  passwordTEC.text.isNotEmpty &&
+                                  emailTEC.text.isNotEmpty &&
+                                  _image != null) {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await authController.registerUser(
+                                    usernameTEC.text,
+                                    emailTEC.text,
+                                    passwordTEC.text,
+                                    _image!);
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              } else {
+                                Get.snackbar('Invalid input',
+                                    'User credentials cannot be empty!',
+                                    margin: EdgeInsets.only(
+                                        top: 15, left: 5, right: 5));
+                              }
+                            },
+                            child: Container(
+                              height: 40,
+                              width: getWidth(context),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: primary,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                'Signup',
+                                style: subHeaderTextStyle,
+                              ),
+                            ),
+                          ),
                     SizedBox(
                       height: 30,
                     ),

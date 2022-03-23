@@ -2,9 +2,10 @@
     package="com.workwithafridi.not_tiktok">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="not_tiktok"
+        android:label="!TikTok"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+       android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:not_tiktok/constants/appData.dart';
 import 'package:not_tiktok/controller/uploadVideoController.dart';
 import 'package:not_tiktok/widgets/customTextField.dart';
@@ -10,20 +11,18 @@ import 'package:video_player/video_player.dart';
 import '../constants/customColors.dart';
 import '../constants/textStyles.dart';
 
-class ConfirmVideoDetailsForUploadScreen extends StatefulWidget {
-  final File video;
-  final String videoPath;
-  const ConfirmVideoDetailsForUploadScreen(
-      {Key? key, required this.video, required this.videoPath})
+class AddVideoDetailsAndUploadScreen extends StatefulWidget {
+  final XFile file;
+  const AddVideoDetailsAndUploadScreen({Key? key, required this.file})
       : super(key: key);
 
   @override
-  State<ConfirmVideoDetailsForUploadScreen> createState() =>
-      _ConfirmVideoDetailsForUploadScreenState();
+  State<AddVideoDetailsAndUploadScreen> createState() =>
+      _AddVideoDetailsAndUploadScreenState();
 }
 
-class _ConfirmVideoDetailsForUploadScreenState
-    extends State<ConfirmVideoDetailsForUploadScreen> {
+class _AddVideoDetailsAndUploadScreenState
+    extends State<AddVideoDetailsAndUploadScreen> {
   late VideoPlayerController videoPlayerController;
   TextEditingController songController = TextEditingController();
   TextEditingController captionController = TextEditingController();
@@ -36,7 +35,8 @@ class _ConfirmVideoDetailsForUploadScreenState
     // TODO: implement initState
     super.initState();
     setState(() {
-      videoPlayerController = VideoPlayerController.file(widget.video);
+      videoPlayerController =
+          VideoPlayerController.file(File(widget.file.path));
     });
     videoPlayerController.initialize();
     videoPlayerController.play();
@@ -104,7 +104,7 @@ class _ConfirmVideoDetailsForUploadScreenState
                       GestureDetector(
                         onTap: () {
                           uploadVideoController.uploadVideo(songController.text,
-                              captionController.text, widget.videoPath);
+                              captionController.text, widget.file.path);
                         },
                         child: Container(
                           height: 40,

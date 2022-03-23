@@ -16,9 +16,8 @@ class AddVideoScreen extends StatelessWidget {
     if (video != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ConfirmVideoDetailsForUploadScreen(
-            videoPath: video.path,
-            video: File(video.path),
+          builder: (context) => AddVideoDetailsAndUploadScreen(
+            file: video,
           ),
         ),
       );
@@ -101,14 +100,13 @@ class AddVideoScreen extends StatelessWidget {
             decoration: BoxDecoration(color: background),
             alignment: Alignment.center,
             child: InkWell(
-              onTap: () => showOptionsDialog(context),
-              child: Container(
-                height: 50,
-                width: getWidth(context)*.6,
-                color: background,
-                child: Image.asset('assets/clickToAddAVideo.png'),
-              )
-            ),
+                onTap: () => showOptionsDialog(context),
+                child: Container(
+                  height: 50,
+                  width: getWidth(context) * .6,
+                  color: background,
+                  child: Image.asset('assets/clickToAddAVideo.png'),
+                )),
           ),
         ),
       ),

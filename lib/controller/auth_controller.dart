@@ -87,15 +87,20 @@ class AuthController extends GetxController {
   }
 
   //registerUser
-  void registerUser(
+  registerUser(
       String username, String email, String password, Uint8List image) async {
     try {
       if (username.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
           image != null) {
+        print('initiated register user');
+        print(username);
+        print(email);
+        print(password);
         UserCredential userCredential = await firebaseAuth
             .createUserWithEmailAndPassword(email: email, password: password);
+        print('pushing to uploadToFirebaseStorage');
         String profilePictureImageUrl = await uploadToFirebaseStorgae(image);
         UserModel userModel = UserModel(
             username: username,
@@ -107,32 +112,40 @@ class AuthController extends GetxController {
             );
         Get.offAll(() => Mainframe());
         Get.snackbar('Hi, $username', 'Welcome to !TikTok! :)');
+        return 'success';
       } else {
         Get.snackbar('Error', 'Fields cannot be empty');
+        return 'error';
       }
     } catch (e) {
       print(e);
       Get.snackbar('Error', 'Error creating a user');
+      return 'error';
     }
   }
 
   //login user
-  void loginUser(String email, String password) async {
+  loginUser(String email, String password) async {
     try {
       if (email.isNotEmpty && password.isNotEmpty) {
         await firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
-        print('success-login');
+        return 'success';
       } else {
         Get.snackbar('Error', 'Login credentials cannot be empty.');
+        return 'error';
       }
     } catch (e) {
       print(e.toString());
       Get.snackbar('Error', 'An error occurred, please try again.');
+
+      return 'error';
     }
   }
 
   void signOut() async {
     await firebaseAuth.signOut();
+
+    Get.offAll(() => LoginScreen());
   }
 }

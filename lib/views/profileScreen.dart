@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_tiktok/constants/authControllerConstant.dart';
 import 'package:not_tiktok/constants/customColors.dart';
+import 'package:not_tiktok/constants/firebase.dart';
 import 'package:not_tiktok/constants/textStyles.dart';
 import 'package:not_tiktok/controller/profileController.dart';
+import 'package:not_tiktok/views/auth/LoginScreen.dart';
 
 import '../constants/appData.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String uid;
+  String uid;
   ProfileScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
@@ -175,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           GestureDetector(
                             onTap: () {
                               if (widget.uid == authController.user.uid) {
-                                authController.signOut();
+                                firebaseAuth.signOut();
                               } else {
                                 controller.followOrUnfollowUser();
                               }
