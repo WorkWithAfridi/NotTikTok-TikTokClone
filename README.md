@@ -1,9 +1,20 @@
-# Not_TikTok
+# Not Tiktok
 
-A full-stack TikTok Clone using Flutter, Firebase & GetX with a built-in video compression facility. Users can log in/ signup,  view reels, post reels, and can even like/ react and comment on them. Users can view content creators' accounts and can even add/ follow them to stay up to date with their favorite creators contents.
+## A full-stack TikTok V1 Clone using Flutter, Firebase & GetX.
 
-State management: GetX
-Backend: Firebase
-Project Architecture: MVC
+A full stack ToDo app with Light and Dark mode, where users can login/ signup and store their Todos and have access to them across all platforms.
 
-Demo: https://www.youtube.com/watch?v=mcxVZEMcafI
+* User Authentication using Firebase Authentication
+* Backend using Firebase Cloud Firestore
+* State management using GetX
+* Video compressor and Video cropping achieved using packages from pub.dev
+
+## Demo video and in-app screenshots
+
+* [Not TikTok Demo Video]( https://www.youtube.com/watch?v=mcxVZEMcafI)
+
+![Demo Image](insertLinkHere?raw=true)
+
+## How to install the app on your physical device
+
+Download the source code and compile the apk using Flutter CLI or Android Studio
