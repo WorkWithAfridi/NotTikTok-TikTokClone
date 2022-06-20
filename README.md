@@ -13,7 +13,7 @@ A full stack ToDo app with Light and Dark mode, where users can login/ signup an
 
 * [Not TikTok Demo Video]( https://www.youtube.com/watch?v=mcxVZEMcafI)
 
-![Demo Image](insertLinkHere?raw=true)
+![Demo Image](https://github.com/llKYOTOll/NotTikTok-TikTokClone/blob/master/assets/promotional_images/Screenshot%202022-06-20%20164112.png?raw=true)
 
 ## How to install the app on your physical device
 
