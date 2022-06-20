@@ -2,7 +2,7 @@
 
 ## A full-stack TikTok V1 Clone using Flutter, Firebase & GetX.
 
-A full stack ToDo app with Light and Dark mode, where users can login/ signup and store their Todos and have access to them across all platforms.
+A full stack TikTok Version 1 clone using Flutter, Firebase and Getx. Users can login/ signup here, watch shorts or upload their own. they can follow other creators and can even like/comment and unfollow the other fellow creators.
 
 * User Authentication using Firebase Authentication
 * Backend using Firebase Cloud Firestore
